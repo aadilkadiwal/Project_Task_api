@@ -25,12 +25,15 @@ def clients_view(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = ClientSerializer(data=request.data)
+        if isinstance(request.data, list):
+            serializer = ClientSerializer(data=request.data, many=True)
+        else :
+            serializer = ClientSerializer(data=request.data) 
         if serializer.is_valid():
             client = serializer.save()   
-            return Response(ClientSerializer(client, many=True).data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
  
 @api_view(['GET', 'PATCH', 'DELETE'])
 def client_detail_view(request, client_id):
@@ -60,10 +63,13 @@ def projects_view(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = ProjectSerializer(data=request.data)
+        if isinstance(request.data, list):
+            serializer = ProjectSerializer(data=request.data, many=True)
+        else :
+            serializer = ProjectSerializer(data=request.data)    
         if serializer.is_valid():
             project = serializer.save()
-            return Response(ProjectSerializer(project).data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -96,10 +102,13 @@ def task_view(request, project_id):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = TaskSerializer(data=request.data)
+        if isinstance(request.data, list):
+            serializer = TaskSerializer(data=request.data, many=True)
+        else :
+            serializer = TaskSerializer(data=request.data)   
         if serializer.is_valid():
             task = serializer.save()
-            return Response(TaskSerializer(task).data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)        
 
