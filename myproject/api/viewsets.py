@@ -112,13 +112,13 @@ class ProjectViewSet(viewsets.ViewSet):
         project.delete()
         return Response("Project Deleted", status=status.HTTP_204_NO_CONTENT)   
 
-    @action(detail=True, methods=["GET", "POST"])
+    @action(detail=True, methods=["GET"])
     def tasks(self, request, pk=None):
         project = get_object_or_404(Project, pk=pk)
         tasks = Task.objects.filter(project=project)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)       
-
+    
 class TaskViewSet(viewsets.ViewSet):
 
     def list(self, request):

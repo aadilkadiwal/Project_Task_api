@@ -1,7 +1,7 @@
-from api import viewsets
+from api import modelviewsets
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('clients', viewsets.ClientViewSet, basename='clients')
-router.register('projects', viewsets.ProjectViewSet, basename='projects')
-router.register('tasks', viewsets.TaskViewSet, basename='tasks')
+router.register('clients', modelviewsets.ClientModelViewSet, basename='clients')
+router.register('projects', modelviewsets.ProjectModelViewSet, basename='projects')
+router.register('tasks', modelviewsets.TaskModelViewSet, basename='tasks')
