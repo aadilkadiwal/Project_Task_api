@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'api.apps.ApiConfig',
 
     'rest_framework',
+    'django_celery_results',
+    'django_celery_beat',
 
 ]
 
@@ -52,11 +55,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # Plugin the middleware
-    '''
-    'api.middlewares.MyFunctionMiddleware',
-    'api.middlewares.MyClassMiddleware',
-    '''
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -134,3 +132,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'

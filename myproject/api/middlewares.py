@@ -1,3 +1,12 @@
+# Plugin with django project (Add this line in settings.py in middleware session)
+
+# Syntax : <App name>.<Folder name where midddleware is written>.<Name of middlewre>
+
+'''
+'api.middlewares.MyFunctionMiddleware',
+'api.middlewares.MyClassMiddleware',
+'''
+
 # Function based middleware
 
 '''
